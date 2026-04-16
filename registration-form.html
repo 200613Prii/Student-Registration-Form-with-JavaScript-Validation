@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Registration Form</title>
+</head>
+
+<body style="background-color:#f2f2f2; font-family:Arial;">
+
+<h2 style="text-align:center; color:#4CAF50;">Registration Form</h2>
+
+<form onsubmit="return validateForm()" 
+      style="width:300px; margin:auto; padding:20px; background:white; border-radius:10px; box-shadow:0 0 10px gray;">
+
+    Name: <br>
+    <input type="text" id="name" style="width:100%; padding:5px;"><br><br>
+
+    Email: <br>
+    <input type="email" id="email" style="width:100%; padding:5px;"><br><br>
+
+    Password: <br>
+    <input type="password" id="password" style="width:100%; padding:5px;"><br><br>
+
+    Gender: <br>
+    <input type="radio" name="gender" value="Male"> Male
+    <input type="radio" name="gender" value="Female"> Female <br><br>
+
+    Course: <br>
+    <select id="course" style="width:100%; padding:5px;">
+        <option value="">Select</option>
+        <option>BCA</option>
+        <option>BBA</option>
+        <option>B.Com</option>
+    </select><br><br>
+
+    Hobbies: <br>
+    <input type="checkbox" name="hobby"> Reading
+    <input type="checkbox" name="hobby"> Sports
+    <input type="checkbox" name="hobby"> Music <br><br>
+
+    Address: <br>
+    <textarea id="address" rows="4" style="width:100%;"></textarea><br><br>
+
+    <input type="submit" value="Register" 
+           style="background:#4CAF50; color:white; padding:8px; border:none; border-radius:5px;">
+
+    <input type="reset" value="Clear" 
+           style="background:#f44336; color:white; padding:8px; border:none; border-radius:5px;">
+
+</form>
+
+<script>
+function validateForm() {
+
+    let name = document.getElementById("name").value.trim();
+    let email = document.getElementById("email").value.trim();
+    let password = document.getElementById("password").value.trim();
+    let course = document.getElementById("course").value;
+    let address = document.getElementById("address").value.trim();
+
+    let gender = document.getElementsByName("gender");
+    let hobbies = document.getElementsByName("hobby");
+
+    // Name validation
+    let namePattern = /^[A-Za-z ]+$/;
+    if (name === "" || !namePattern.test(name)) {
+        alert("Please enter a valid name (letters only)");
+        return false;
+    }
+
+    // Email validation
+    let emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+    if (!emailPattern.test(email)) {
+        alert("Please enter a valid email");
+        return false;
+    }
+
+    // Password validation
+    if (password.length < 6) {
+        alert("Password must be at least 6 characters");
+        return false;
+    }
+
+    // Gender validation
+    let genderSelected = false;
+    for (let i = 0; i < gender.length; i++) {
+        if (gender[i].checked) {
+            genderSelected = true;
+        }
+    }
+    if (!genderSelected) {
+        alert("Please select gender");
+        return false;
+    }
+
+    // Course validation
+    if (course === "") {
+        alert("Please select a course");
+        return false;
+    }
+
+    // Hobbies validation
+    let hobbySelected = false;
+    for (let i = 0; i < hobbies.length; i++) {
+        if (hobbies[i].checked) {
+            hobbySelected = true;
+        }
+    }
+    if (!hobbySelected) {
+        alert("Please select at least one hobby");
+        return false;
+    }
+
+    // Address validation
+    if (address === "") {
+        alert("Please enter your address");
+        return false;
+    }
+
+    // Success
+    alert("Registration Successful!");
+    return true;
+}
+</script>
+
+</body>
+</html>
